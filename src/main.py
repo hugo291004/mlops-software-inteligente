@@ -39,7 +39,8 @@ def download_champion_from_comet():
         
         champion_exp = None
         for exp in experiments:
-            if "production-champion" in exp.get_tags():
+            tags = exp.get_tags()
+            if "production-champion" in tags and "archived" not in tags:
                 champion_exp = exp
                 break
                 

@@ -76,7 +76,6 @@ if f1_nuevo > f1_champion_actual:
     # Remover Tag del viejo Champion usando la API
     if old_champion_id:
         old_exp = api.get_experiment_by_key(old_champion_id)
-        old_exp.remove_tag("production-champion")
         old_exp.add_tag("archived")
         
     # Asignar Tag al nuevo Champion
