@@ -8,8 +8,12 @@ from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 
-from dotenv import load_dotenv
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 COMET_API_KEY = os.getenv("COMET_API_KEY") 
 COMET_WORKSPACE = os.getenv("COMET_WORKSPACE", "hugo-alvarez-3377")
 COMET_PROJECT = os.getenv("COMET_PROJECT", "mlops-software-inteligente")
