@@ -1,0 +1,36 @@
+name: MLOps Continuous Training Pipeline - Comet.ml Edition
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  continuous-training:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del Código Fuente
+      uses: actions/checkout@v3
+
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: Instalar Dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install comet-ml scikit-learn pandas numpy joblib
+
+    - name: Ejecutar Pipeline de Entrenamiento Continuo (CT)
+      env:
+        # Inyección de Secretos del Repositorio de GitHub
+        COMET_API_KEY: ${{ secrets.COMET_API_KEY }} 
+        COMET_WORKSPACE: "TU_WORKSPACE"
+        COMET_PROJECT: "TU_PROYECTO"
+        GITHUB_SHA: ${{ github.sha }}
+        GITHUB_ACTOR: ${{ github.actor }}
+      run: |
+        python src/train.py
