@@ -28,8 +28,8 @@ jobs:
       env:
         # Inyección de Secretos del Repositorio de GitHub
         COMET_API_KEY: ${{ secrets.COMET_API_KEY }} 
-        COMET_WORKSPACE: "TU_WORKSPACE"
-        COMET_PROJECT: "TU_PROYECTO"
+        COMET_WORKSPACE: ${{ secrets.COMET_WORKSPACE }} 
+        COMET_PROJECT: ${{ secrets.COMET_PROJECT }} 
         GITHUB_SHA: ${{ github.sha }}
         GITHUB_ACTOR: ${{ github.actor }}
       run: |
